@@ -175,6 +175,10 @@ final public class AWSMobileClient: _AWSMobileClient {
         let configValue = "\(userPoolID)#\(appClientID)#\(identityPoolID)"
         self.keychain.setString(configValue, forKey: "configurationKey")
     }
+
+    public func resetInitialization() {
+        isInitialized = false
+    }
     
     /// Initializes `AWSMobileClient` and determines the `UserState` for current user using cache.
     ///
