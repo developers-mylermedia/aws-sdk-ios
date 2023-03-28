@@ -96,6 +96,12 @@ Class AWSCognitoUserPoolsSignInProviderClass;
     return [self init];
 }
 
+- (instancetype)reinitWithConfiguration:(NSDictionary<NSString *,id> *)config {
+    AWSDDLogDebug(@"AWSMobileClient reinit with custom configuration object...");
+    [AWSInfo configureCustomAWSInfo:config];
+    return [self init];
+}
+
 #pragma mark AppDelegate Methods
 
 - (BOOL)interceptApplication:(UIApplication *)application
