@@ -138,8 +138,10 @@ static AWSServiceConfiguration *_identityPoolConfiguration = nil;
     }
 }
 
-+ (void)configureCustomAWSInfo:(NSDictionary<NSString *, id> *)config {
-    _userConfig = config;
++ (void)resetDefaultAWSInfo {
+    _defaultAWSInfo = nil;
+    _userConfig = nil;
+    _identityPoolConfiguration = nil;
 }
 
 + (void)configureIdentityPoolService:(AWSServiceConfiguration *)config {
