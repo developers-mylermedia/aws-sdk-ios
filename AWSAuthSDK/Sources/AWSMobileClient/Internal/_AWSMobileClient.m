@@ -92,7 +92,6 @@ Class AWSCognitoUserPoolsSignInProviderClass;
 
 - (instancetype)initWithConfiguration:(NSDictionary<NSString *,id> *)config {
     AWSDDLogDebug(@"AWSMobileClient initialized with custom configuration object...");
-    [AWSInfo resetDefaultAWSInfo];
     [AWSInfo configureDefaultAWSInfo:config];
     return [self init];
 }

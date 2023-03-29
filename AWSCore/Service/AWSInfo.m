@@ -131,17 +131,8 @@ static AWSServiceConfiguration *_identityPoolConfiguration = nil;
 }
 
 + (void)configureDefaultAWSInfo:(NSDictionary<NSString *, id> *)config {
-    if (_defaultAWSInfo) {
-        AWSDDLogWarn(@"Configuration already set, you cannot call configure after AWSInfo is created.");
-    } else {
-        _userConfig = config;
-    }
-}
-
-+ (void)resetDefaultAWSInfo {
-    _defaultAWSInfo = nil;
-    _userConfig = nil;
-    _identityPoolConfiguration = nil;
+    _userConfig = config;
+    _defaultAWSInfo = [[AWSInfo alloc] initWithConfiguration:_userConfig];
 }
 
 + (void)configureIdentityPoolService:(AWSServiceConfiguration *)config {

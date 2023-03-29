@@ -46,8 +46,6 @@ FOUNDATION_EXPORT NSString *const AWSInfoDefault;
  */
 + (void)configureDefaultAWSInfo:(NSDictionary<NSString *, id> *)config;
 
-+ (void)resetDefaultAWSInfo;
-
 /**
  * Service configuration to be used while creating the identity pool service.
  *

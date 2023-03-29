@@ -176,6 +176,7 @@ final public class AWSMobileClient: _AWSMobileClient {
         self.keychain.setString(configValue, forKey: "configurationKey")
     }
 
+    /// Sets `isInitialized` to false to make sure to be able to call `initialize` again
     public func resetInitialization() {
         isInitialized = false
     }
@@ -195,13 +196,11 @@ final public class AWSMobileClient: _AWSMobileClient {
         }
     }
 
-    // Internal initialize method, pass userpoolHandler for testing purposes only.
-    internal func _internalInitialize(
-        userPoolHandler: UserPoolOperationsHandler = .sharedInstance,
-        _ completionHandler: @escaping (UserState?, Error?) -> Void) {
+    // Internal initialize method
+    internal func _internalInitialize(_ completionHandler: @escaping (UserState?, Error?) -> Void) {
         do {
             keychain.migrateToCurrentAccessibility()
-            userpoolOpsHelper = userPoolHandler
+            userpoolOpsHelper = UserPoolOperationsHandler()
             cleanupPreviousInstall()
             initializeKeychainItems()
             fallbackLegacyFederationProvider()

@@ -58,26 +58,25 @@ static NSString *const AWSPinpointContextKeychainUniqueIdKey = @"com.amazonaws.A
 
 + (instancetype)defaultCognitoIdentityUserPool {
     static AWSCognitoIdentityUserPool *_defaultUserPool = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        AWSServiceConfiguration *serviceConfiguration = nil;
-        AWSServiceInfo *serviceInfo = [[AWSInfo defaultAWSInfo] defaultServiceInfo:AWSInfoCognitoUserPool];
-        if (serviceInfo) {
-            AWSEndpoint *endpointOverride = [AWSCognitoIdentityUserPool resolveEndpointOverrideFromServiceInfo:serviceInfo];
-            if (endpointOverride) {
-                serviceConfiguration = [[AWSServiceConfiguration alloc] initWithRegion:serviceInfo.region
-                                                                              endpoint:endpointOverride
-                                                                   credentialsProvider:nil
-                                                                   localTestingEnabled:NO];
-            } else {
-                serviceConfiguration = [[AWSServiceConfiguration alloc] initWithRegion:serviceInfo.region
-                                                                   credentialsProvider:nil];
-            }
+    AWSServiceConfiguration *serviceConfiguration = nil;
+    AWSServiceInfo *serviceInfo = [[AWSInfo defaultAWSInfo] defaultServiceInfo:AWSInfoCognitoUserPool];
+
+    if (serviceInfo) {
+        AWSEndpoint *endpointOverride = [AWSCognitoIdentityUserPool resolveEndpointOverrideFromServiceInfo:serviceInfo];
+        if (endpointOverride) {
+            serviceConfiguration = [[AWSServiceConfiguration alloc] initWithRegion:serviceInfo.region
+                                                                          endpoint:endpointOverride
+                                                               credentialsProvider:nil
+                                                               localTestingEnabled:NO];
+        } else {
+            serviceConfiguration = [[AWSServiceConfiguration alloc] initWithRegion:serviceInfo.region
+                                                               credentialsProvider:nil];
         }
-        AWSCognitoIdentityUserPoolConfiguration *configuration = [AWSCognitoIdentityUserPool buildUserPoolConfiguration:serviceInfo];
-        _defaultUserPool = [[AWSCognitoIdentityUserPool alloc] initWithConfiguration:serviceConfiguration
-                                                               userPoolConfiguration:configuration];
-    });
+    }
+
+    AWSCognitoIdentityUserPoolConfiguration *configuration = [AWSCognitoIdentityUserPool buildUserPoolConfiguration:serviceInfo];
+    _defaultUserPool = [[AWSCognitoIdentityUserPool alloc] initWithConfiguration:serviceConfiguration
+                                                           userPoolConfiguration:configuration];
     
     return _defaultUserPool;
 }
