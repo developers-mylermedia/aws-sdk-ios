@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
    # Include transitive dependencies to help CocoaPods resolve deeply nested
    # dependency graphs; without this we get sporadic failures compiling when a
    # project relies on AWSMobileClient
-   s.dependency 'AWSCore-MylerFork', :git => '2.30.4'
+   s.dependency 'AWSCore-MylerFork', '2.30.4'
    s.dependency 'AWSCognitoIdentityProviderASF-MylerFork', '2.30.4'
 
    s.source_files = 'AWSAuthSDK/Sources/AWSMobileClient/*.{h,m}', 'AWSAuthSDK/Sources/AWSMobileClient/Internal/*.{h,m}', 'AWSAuthSDK/Sources/AWSMobileClient/**/*.swift', 'AWSCognitoAuth/**/*.{h,m,c}'
