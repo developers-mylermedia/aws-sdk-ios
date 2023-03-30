@@ -14,7 +14,7 @@
 //
 
 #import "_AWSMobileClient.h"
-#import <AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.h>
+#import <AWSCognitoIdentityProvider_MylerFork/AWSCognitoIdentityProvider.h>
 #ifdef USE_XCF
     #import "AWSMobileClientXCF-Mixed-Swift.h"
 #else

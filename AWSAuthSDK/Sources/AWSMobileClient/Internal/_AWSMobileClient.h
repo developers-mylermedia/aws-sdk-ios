@@ -15,7 +15,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <AWSAuthCore/AWSAuthCore.h>
+#import <AWSAuthCore_MylerFork/AWSAuthCore.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

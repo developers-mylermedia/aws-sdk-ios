@@ -9,7 +9,7 @@
 #ifndef AWSCognitoIdentityUserPool_Extension_h
 #define AWSCognitoIdentityUserPool_Extension_h
 
-#import <AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.h>
+#import <AWSCognitoIdentityProvider_MylerFork/AWSCognitoIdentityProvider.h>
 
 @interface AWSCognitoIdentityUserPool (Internal)
 

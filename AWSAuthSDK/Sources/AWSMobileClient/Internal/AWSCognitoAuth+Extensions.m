@@ -19,7 +19,7 @@
 #else
     #import "AWSMobileClient-Mixed-Swift.h"
 #endif
-#import <AWSCore/AWSCore.h>
+#import <AWSCore_MylerFork/AWSCore.h>
 
 @interface AWSCognitoAuthConfiguration()
 
