@@ -14,11 +14,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AWSMobileClient/_AWSMobileClient.h>
-#import <AWSMobileClient/AWSCognitoAuth.h>
-#import <AWSMobileClient/AWSCognitoAuth+Extensions.h>
-#import <AWSMobileClient/AWSCognitoCredentialsProvider+Extension.h>
-#import <AWSMobileClient/AWSCognitoIdentityUserPool+Extension.h>
+#import <AWSMobileClient_MylerFork/_AWSMobileClient.h>
+#import <AWSMobileClient_MylerFork/AWSCognitoAuth.h>
+#import <AWSMobileClient_MylerFork/AWSCognitoAuth+Extensions.h>
+#import <AWSMobileClient_MylerFork/AWSCognitoCredentialsProvider+Extension.h>
+#import <AWSMobileClient_MylerFork/AWSCognitoIdentityUserPool+Extension.h>
 
 //! Project version number for AWSMobileClient.
 FOUNDATION_EXPORT double AWSMobileClientVersionNumber;
