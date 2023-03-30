@@ -14,7 +14,7 @@
 //
 
 import Foundation
-import AWSCore
+import AWSCore_MylerFork
 
 struct AWSMobileClientLogging {
 

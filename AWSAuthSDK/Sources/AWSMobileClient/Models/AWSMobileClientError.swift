@@ -13,7 +13,7 @@
 // permissions and limitations under the License.
 
 import Foundation
-import AWSCognitoIdentityProvider
+import AWSCognitoIdentityProvider_MylerFork
 
 /// The error enum for `AWSMobileClient` errors.
 public enum AWSMobileClientError: Error {

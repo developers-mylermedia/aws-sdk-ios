@@ -14,7 +14,7 @@
 //
 
 import Foundation
-import AWSCore
+import AWSCore_MylerFork
 
 public typealias TokenCompletion = (Tokens?, Error?) -> Void
 

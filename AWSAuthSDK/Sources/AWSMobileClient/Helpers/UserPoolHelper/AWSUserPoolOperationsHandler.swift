@@ -17,7 +17,7 @@
 //
 
 import Foundation
-import AWSCognitoIdentityProvider
+import AWSCognitoIdentityProvider_MylerFork
 
 protocol UserPoolAuthHelperCallbacks {
 

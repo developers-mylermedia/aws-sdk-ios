@@ -14,7 +14,7 @@
 //
 
 import Foundation
-import AWSCognitoIdentityProvider
+import AWSCognitoIdentityProvider_MylerFork
 
 /// Contains the tokens for an active sign in session.
 public struct Tokens {

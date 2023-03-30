@@ -4,7 +4,7 @@
 //
 
 import Foundation
-import AWSCognitoIdentityProvider
+import AWSCognitoIdentityProvider_MylerFork
 
 /// DeviceOperations is responsible for handling mobile device related operations for logged in user.
 public class DeviceOperations {

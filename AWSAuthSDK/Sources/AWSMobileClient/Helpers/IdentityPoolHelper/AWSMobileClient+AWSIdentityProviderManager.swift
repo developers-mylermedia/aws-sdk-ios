@@ -14,7 +14,7 @@
 //
 
 import Foundation
-import AWSCognitoIdentityProvider
+import AWSCognitoIdentityProvider_MylerFork
 
 // MARK: `AWSIdentityProviderManager` protocol methods
 extension AWSMobileClient: AWSIdentityProviderManager {

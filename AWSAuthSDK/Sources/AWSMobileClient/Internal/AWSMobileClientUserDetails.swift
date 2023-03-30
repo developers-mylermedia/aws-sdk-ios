@@ -17,7 +17,7 @@
 //
 
 import Foundation
-import AWSCognitoIdentityProvider
+import AWSCognitoIdentityProvider_MylerFork
 
 /// Mobile client helper class to handle user attribute related operations
 ///
