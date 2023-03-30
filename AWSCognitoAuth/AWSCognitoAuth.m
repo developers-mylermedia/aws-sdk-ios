@@ -14,11 +14,11 @@
 //
 
 #import "AWSCognitoAuth_Internal.h"
-#import <AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.h>
+#import <AWSCognitoIdentityProviderASF_MylerFork/AWSCognitoIdentityProviderASF.h>
 #import <SafariServices/SafariServices.h>
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
-#import <AWSCore/AWSCore.h>
+#import <AWSCore_MylerFork/AWSCore.h>
 
 NSString *const AWSCognitoAuthErrorDomain = @"com.amazon.cognito.AWSCognitoAuthErrorDomain";
 
