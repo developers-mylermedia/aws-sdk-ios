@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-   s.name         = 'AWSAuthCore'
+   s.name         = 'AWSAuthCore-MylerFork'
    s.version      = '2.30.4'
    s.summary      = 'Amazon Web Services SDK for iOS.'
  
@@ -9,10 +9,10 @@ Pod::Spec.new do |s|
    s.license      = 'Apache License, Version 2.0'
    s.author       = { 'Amazon Web Services' => 'amazonwebservices' }
    s.platform     = :ios, '9.0'
-   s.source       = { :git => 'https://github.com/aws-amplify/aws-sdk-ios.git',
+   s.source       = { :git => 'https://github.com/developers-mylermedia/aws-sdk-ios.git',
                       :tag => s.version}
    s.requires_arc = true
-   s.dependency 'AWSCore', '2.30.4'
+   s.dependency 'AWSCore-MylerFork', '2.30.4'
    s.source_files = 'AWSAuthSDK/Sources/AWSAuthCore/*.{h,m}'
    s.public_header_files = 'AWSAuthSDK/Sources/AWSAuthCore/*.h'
  end
