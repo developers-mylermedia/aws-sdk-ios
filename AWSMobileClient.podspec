@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-   s.name         = 'AWSMobileClient'
+   s.name         = 'AWSMobileClient-MylerFork'
    s.version      = '2.30.4'
    s.summary      = 'Amazon Web Services SDK for iOS.'
  
@@ -13,14 +13,14 @@ Pod::Spec.new do |s|
                       :tag => s.version}
    s.requires_arc = true
 
-   s.dependency 'AWSAuthCore', :git => 'https://github.com/developers-mylermedia/aws-sdk-ios.git'
-   s.dependency 'AWSCognitoIdentityProvider', :git => 'https://github.com/developers-mylermedia/aws-sdk-ios.git'
+   s.dependency 'AWSAuthCore-MylerFork', '2.30.4'
+   s.dependency 'AWSCognitoIdentityProvider-MylerFork', '2.30.4'
 
    # Include transitive dependencies to help CocoaPods resolve deeply nested
    # dependency graphs; without this we get sporadic failures compiling when a
    # project relies on AWSMobileClient
-   s.dependency 'AWSCore', :git => 'https://github.com/developers-mylermedia/aws-sdk-ios.git'
-   s.dependency 'AWSCognitoIdentityProviderASF', :git => 'https://github.com/developers-mylermedia/aws-sdk-ios.git'
+   s.dependency 'AWSCore-MylerFork', :git => '2.30.4'
+   s.dependency 'AWSCognitoIdentityProviderASF-MylerFork', '2.30.4'
 
    s.source_files = 'AWSAuthSDK/Sources/AWSMobileClient/*.{h,m}', 'AWSAuthSDK/Sources/AWSMobileClient/Internal/*.{h,m}', 'AWSAuthSDK/Sources/AWSMobileClient/**/*.swift', 'AWSCognitoAuth/**/*.{h,m,c}'
    s.public_header_files = 'AWSAuthSDK/Sources/AWSMobileClient/AWSMobileClient.h', 'AWSAuthSDK/Sources/AWSMobileClient/Internal/_AWSMobileClient.h', 'AWSCognitoAuth/*.h', 'AWSAuthSDK/Sources/AWSMobileClient/Internal/AWSCognitoAuth+Extensions.h', 'AWSAuthSDK/Sources/AWSMobileClient/Internal/AWSCognitoCredentialsProvider+Extension.h', 'AWSAuthSDK/Sources/AWSMobileClient/Internal/AWSCognitoIdentityUserPool+Extension.h'
