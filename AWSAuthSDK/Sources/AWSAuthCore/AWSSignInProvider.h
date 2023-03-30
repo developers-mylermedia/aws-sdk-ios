@@ -14,7 +14,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AWSCore/AWSCore.h>
+#import <AWSCore_MylerFork/AWSCore.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

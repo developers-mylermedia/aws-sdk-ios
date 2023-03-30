@@ -15,7 +15,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import <AWSCore/AWSCore.h>
+#import <AWSCore_MylerFork/AWSCore.h>
 #import "AWSSignInProvider.h"
 #import "AWSSignInProviderApplicationIntercept.h"
 
@@ -44,13 +44,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Returns the Identity Manager singleton instance configured using the information provided in `awsconfiguration.json` or `Info.plist` file.
- 
+
  *Swift*
- 
+
  let identityManager = AWSIdentityManager.default()
- 
+
  *Objective-C*
- 
+
  AWSIdentityManager *identityManager = [AWSIdentityManager defaultIdentityManager];
  */
 + (instancetype)defaultIdentityManager;
