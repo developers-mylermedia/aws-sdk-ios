@@ -38,7 +38,7 @@ FOUNDATION_EXPORT double AWSCognitoIdentityProviderVersionNumber DEPRECATED_MSG_
  */
 FOUNDATION_EXPORT const unsigned char AWSCognitoIdentityProviderVersionString[] DEPRECATED_MSG_ATTRIBUTE("Use AWSCognitoIdentityProviderSDKVersion instead.");
 
-#import <AWSCore/AWSCore.h>
+#import <AWSCore_MylerFork/AWSCore.h>
 #import "AWSCognitoIdentityProviderService.h"
 #import "AWSCognitoIdentityUserPool.h"
 #import "AWSCognitoIdentityUser.h"
