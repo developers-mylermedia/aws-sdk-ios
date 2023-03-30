@@ -14,7 +14,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AWSCore/AWSCore.h>
+#import <AWSCore_MylerFork/AWSCore.h>
 #import "AWSCognitoIdentityProviderModel.h"
 #import "AWSCognitoIdentityProviderResources.h"
 

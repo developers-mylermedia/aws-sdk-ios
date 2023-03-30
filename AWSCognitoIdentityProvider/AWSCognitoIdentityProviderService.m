@@ -14,14 +14,14 @@
 //
 
 #import "AWSCognitoIdentityProviderService.h"
-#import <AWSCore/AWSCategory.h>
-#import <AWSCore/AWSNetworking.h>
-#import <AWSCore/AWSSignature.h>
-#import <AWSCore/AWSService.h>
-#import <AWSCore/AWSURLRequestSerialization.h>
-#import <AWSCore/AWSURLResponseSerialization.h>
-#import <AWSCore/AWSURLRequestRetryHandler.h>
-#import <AWSCore/AWSSynchronizedMutableDictionary.h>
+#import <AWSCore_MylerFork/AWSCategory.h>
+#import <AWSCore_MylerFork/AWSNetworking.h>
+#import <AWSCore_MylerFork/AWSSignature.h>
+#import <AWSCore_MylerFork/AWSService.h>
+#import <AWSCore_MylerFork/AWSURLRequestSerialization.h>
+#import <AWSCore_MylerFork/AWSURLResponseSerialization.h>
+#import <AWSCore_MylerFork/AWSURLRequestRetryHandler.h>
+#import <AWSCore_MylerFork/AWSSynchronizedMutableDictionary.h>
 #import "AWSCognitoIdentityProviderResources.h"
 
 static NSString *const AWSInfoCognitoIdentityProvider = @"CognitoIdentityProvider";

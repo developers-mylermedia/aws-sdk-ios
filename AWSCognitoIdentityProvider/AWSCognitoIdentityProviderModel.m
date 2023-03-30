@@ -14,7 +14,7 @@
 //
 
 #import "AWSCognitoIdentityProviderModel.h"
-#import <AWSCore/AWSCategory.h>
+#import <AWSCore_MylerFork/AWSCategory.h>
 
 NSString *const AWSCognitoIdentityProviderErrorDomain = @"com.amazonaws.AWSCognitoIdentityProviderErrorDomain";
 
