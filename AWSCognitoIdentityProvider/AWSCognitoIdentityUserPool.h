@@ -419,7 +419,7 @@ typedef NS_ENUM(NSInteger, AWSCognitoIdentityClientErrorType) {
  */
 @optional
 -(void) getMultiFactorAuthenticationCode: (AWSCognitoIdentityMultifactorAuthenticationInput *) authenticationInput
-                 mfaCodeCompletionSource: (AWSTaskCompletionSource<NSString *> *) mfaCodeCompletionSource __attribute__((deprecated("Use `getMultiFactorAuthenticationCode_v2:mfaCodeCompletionSource:` instead")));
+                 mfaCodeCompletionSource: (AWSTaskCompletionSource<NSString *> *) mfaCodeCompletionSource;
 
 /**
  Obtain mfa code and clientMetadata from the end user. This is optional for backwards compatibility with existing clients
