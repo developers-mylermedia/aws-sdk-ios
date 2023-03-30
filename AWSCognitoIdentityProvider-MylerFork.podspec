@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
 
   s.description  = 'Amazon Cognito Identity Provider enables sign up and authentication of your end users'
 
-  s.homepage     = 'http://aws.amazon.com/mobile/sdk'
+  s.homepage     = 'https://aws.amazon.com/amplify/'
   s.license      = 'Apache License, Version 2.0'
   s.author       = { 'Amazon Web Services' => 'amazonwebservices' }
   s.platform     = :ios, '9.0'
