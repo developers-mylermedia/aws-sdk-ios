@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 
-  s.name         = 'AWSCore'
+  s.name         = 'AWSCore-MylerFork'
   s.version      = '2.30.4'
   s.summary      = 'Amazon Web Services SDK for iOS.'
 
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.author       = { 'Amazon Web Services' => 'amazonwebservices' }
   s.platform     = :ios, '9.0'
 
-  s.source       = { :git => 'https://github.com/aws-amplify/aws-sdk-ios.git',
+  s.source       = { :git => 'https://github.com/developers-mylermedia/aws-sdk-ios.git',
                      :tag => s.version}
 
   s.frameworks   = 'CoreGraphics', 'UIKit', 'Foundation', 'SystemConfiguration', 'Security'
