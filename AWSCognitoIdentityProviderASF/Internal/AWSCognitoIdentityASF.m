@@ -2,7 +2,7 @@
 #import <UIKit/UIKit.h>
 #import <sys/utsname.h>
 #import <CommonCrypto/CommonHMAC.h>
-#import <AWSCore/AWSCocoaLumberjack.h>
+#import <AWSCore_MylerFork/AWSCocoaLumberjack.h>
 
 @interface AWSCognitoIdentityASF()
 + (NSString *) dashIfNil: (NSString *) str;
