@@ -8,7 +8,17 @@
 
 The AWS SDK for iOS provides a library and documentation for developers to build connected mobile applications using AWS.
 
-### Features / APIs
+## ⚠️ Fork information
+
+This fork has been created to re-initalize the AWSMobileClient instance. Re-initalizing is needed to use the AWSMobileClient with a different configuration. Before, a restart of the app was needed before the client could use another configuration. With the SSO sign-in, every customer has it's own configuration. To prevent users to force restart their app, this fork has been created.
+
+#### Fork adjustments
+- In `AWSMobileClient.swift`, a `resetInitialization` func has been created to set the `isInitialized` to false.
+- In `AWSMobileClient.swift`, the `userpoolOpsHelper` in the `_internalInitialize` func gets recreated instead of using the sharedInstance.
+- In `AWSCognitoIdentityUserPool.m`, the `dispatch_once` in the `defaultCognitoIdentityUserPool` func has been removed to make sure the `_defaultUserPool` gets recreated.
+- In `AWSInfo.m`, the `configureDefaultAWSInfo` func has been adjusted to make sure the `_userConfig` and `_defaultAWSInfo` always get recreated.
+
+## Features / APIs
 
 - [__Authentication__](https://aws-amplify.github.io/docs/ios/authentication): APIs and building blocks for developers who want to create user authentication experiences.  
 - [__Analytics__](https://aws-amplify.github.io/docs/ios/analytics): Easily collect analytics data for your app. Analytics data includes user sessions and other custom events that you want to track in your app.  
