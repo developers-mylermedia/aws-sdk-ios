@@ -21,10 +21,10 @@ FOUNDATION_EXPORT double AWSAuthCoreVersionNumber;
 //! Project version string for AWSAuthCore.
 FOUNDATION_EXPORT const unsigned char AWSAuthCoreVersionString[];
 
-#import <AWSAuthCore/AWSSignInManager.h>
-#import <AWSAuthCore/AWSIdentityManager.h>
-#import <AWSAuthCore/AWSSignInProviderApplicationIntercept.h>
-#import <AWSAuthCore/AWSSignInProvider.h>
-#import <AWSAuthCore/AWSSignInButtonView.h>
-#import <AWSAuthCore/AWSUIConfiguration.h>
-#import <AWSAuthCore/AWSAuthUIHelper.h>
+#import <AWSAuthCore_MylerFork/AWSSignInManager.h>
+#import <AWSAuthCore_MylerFork/AWSIdentityManager.h>
+#import <AWSAuthCore_MylerFork/AWSSignInProviderApplicationIntercept.h>
+#import <AWSAuthCore_MylerFork/AWSSignInProvider.h>
+#import <AWSAuthCore_MylerFork/AWSSignInButtonView.h>
+#import <AWSAuthCore_MylerFork/AWSUIConfiguration.h>
+#import <AWSAuthCore_MylerFork/AWSAuthUIHelper.h>
