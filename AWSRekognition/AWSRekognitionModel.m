@@ -1,5 +1,5 @@
 //
-// Copyright 2010-2022 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// Copyright 2010-2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License").
 // You may not use this file except in compliance with the License.
@@ -51,6 +51,93 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 @end
 
+@implementation AWSRekognitionAssociateFacesRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientRequestToken" : @"ClientRequestToken",
+             @"collectionId" : @"CollectionId",
+             @"faceIds" : @"FaceIds",
+             @"userId" : @"UserId",
+             @"userMatchThreshold" : @"UserMatchThreshold",
+             };
+}
+
+@end
+
+@implementation AWSRekognitionAssociateFacesResponse
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"associatedFaces" : @"AssociatedFaces",
+             @"unsuccessfulFaceAssociations" : @"UnsuccessfulFaceAssociations",
+             @"userStatus" : @"UserStatus",
+             };
+}
+
++ (NSValueTransformer *)associatedFacesJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionAssociatedFace class]];
+}
+
++ (NSValueTransformer *)unsuccessfulFaceAssociationsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionUnsuccessfulFaceAssociation class]];
+}
+
++ (NSValueTransformer *)userStatusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"ACTIVE"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusActive);
+        }
+        if ([value caseInsensitiveCompare:@"UPDATING"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusUpdating);
+        }
+        if ([value caseInsensitiveCompare:@"CREATING"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusCreating);
+        }
+        if ([value caseInsensitiveCompare:@"CREATED"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusCreated);
+        }
+        return @(AWSRekognitionUserStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSRekognitionUserStatusActive:
+                return @"ACTIVE";
+            case AWSRekognitionUserStatusUpdating:
+                return @"UPDATING";
+            case AWSRekognitionUserStatusCreating:
+                return @"CREATING";
+            case AWSRekognitionUserStatusCreated:
+                return @"CREATED";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSRekognitionAssociatedFace
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"faceId" : @"FaceId",
+             };
+}
+
+@end
+
 @implementation AWSRekognitionAudioMetadata
 
 + (BOOL)supportsSecureCoding {
@@ -64,6 +151,30 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
              @"numberOfChannels" : @"NumberOfChannels",
              @"sampleRate" : @"SampleRate",
              };
+}
+
+@end
+
+@implementation AWSRekognitionAuditImage
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"boundingBox" : @"BoundingBox",
+             @"bytes" : @"Bytes",
+             @"s3Object" : @"S3Object",
+             };
+}
+
++ (NSValueTransformer *)boundingBoxJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionBoundingBox class]];
+}
+
++ (NSValueTransformer *)s3ObjectJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionS3Object class]];
 }
 
 @end
@@ -466,7 +577,10 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"durationMillis" : @"DurationMillis",
+             @"endTimestampMillis" : @"EndTimestampMillis",
              @"moderationLabel" : @"ModerationLabel",
+             @"startTimestampMillis" : @"StartTimestampMillis",
              @"timestamp" : @"Timestamp",
              };
 }
@@ -616,6 +730,59 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 @end
 
+@implementation AWSRekognitionCreateFaceLivenessSessionRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientRequestToken" : @"ClientRequestToken",
+             @"kmsKeyId" : @"KmsKeyId",
+             @"settings" : @"Settings",
+             };
+}
+
++ (NSValueTransformer *)settingsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionCreateFaceLivenessSessionRequestSettings class]];
+}
+
+@end
+
+@implementation AWSRekognitionCreateFaceLivenessSessionRequestSettings
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"auditImagesLimit" : @"AuditImagesLimit",
+             @"outputConfig" : @"OutputConfig",
+             };
+}
+
++ (NSValueTransformer *)outputConfigJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionLivenessOutputConfig class]];
+}
+
+@end
+
+@implementation AWSRekognitionCreateFaceLivenessSessionResponse
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"sessionId" : @"SessionId",
+             };
+}
+
+@end
+
 @implementation AWSRekognitionCreateProjectRequest
 
 + (BOOL)supportsSecureCoding {
@@ -747,6 +914,30 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 	return @{
              @"streamProcessorArn" : @"StreamProcessorArn",
              };
+}
+
+@end
+
+@implementation AWSRekognitionCreateUserRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientRequestToken" : @"ClientRequestToken",
+             @"collectionId" : @"CollectionId",
+             @"userId" : @"UserId",
+             };
+}
+
+@end
+
+@implementation AWSRekognitionCreateUserResponse
+
++ (BOOL)supportsSecureCoding {
+    return YES;
 }
 
 @end
@@ -1160,7 +1351,12 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"deletedFaces" : @"DeletedFaces",
+             @"unsuccessfulFaceDeletions" : @"UnsuccessfulFaceDeletions",
              };
+}
+
++ (NSValueTransformer *)unsuccessfulFaceDeletionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionUnsuccessfulFaceDeletion class]];
 }
 
 @end
@@ -1364,6 +1560,30 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 @end
 
+@implementation AWSRekognitionDeleteUserRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientRequestToken" : @"ClientRequestToken",
+             @"collectionId" : @"CollectionId",
+             @"userId" : @"UserId",
+             };
+}
+
+@end
+
+@implementation AWSRekognitionDeleteUserResponse
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+@end
+
 @implementation AWSRekognitionDescribeCollectionRequest
 
 + (BOOL)supportsSecureCoding {
@@ -1390,6 +1610,7 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
              @"creationTimestamp" : @"CreationTimestamp",
              @"faceCount" : @"FaceCount",
              @"faceModelVersion" : @"FaceModelVersion",
+             @"userCount" : @"UserCount",
              };
 }
 
@@ -2126,6 +2347,92 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 @end
 
+@implementation AWSRekognitionDisassociateFacesRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientRequestToken" : @"ClientRequestToken",
+             @"collectionId" : @"CollectionId",
+             @"faceIds" : @"FaceIds",
+             @"userId" : @"UserId",
+             };
+}
+
+@end
+
+@implementation AWSRekognitionDisassociateFacesResponse
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"disassociatedFaces" : @"DisassociatedFaces",
+             @"unsuccessfulFaceDisassociations" : @"UnsuccessfulFaceDisassociations",
+             @"userStatus" : @"UserStatus",
+             };
+}
+
++ (NSValueTransformer *)disassociatedFacesJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionDisassociatedFace class]];
+}
+
++ (NSValueTransformer *)unsuccessfulFaceDisassociationsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionUnsuccessfulFaceDisassociation class]];
+}
+
++ (NSValueTransformer *)userStatusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"ACTIVE"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusActive);
+        }
+        if ([value caseInsensitiveCompare:@"UPDATING"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusUpdating);
+        }
+        if ([value caseInsensitiveCompare:@"CREATING"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusCreating);
+        }
+        if ([value caseInsensitiveCompare:@"CREATED"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusCreated);
+        }
+        return @(AWSRekognitionUserStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSRekognitionUserStatusActive:
+                return @"ACTIVE";
+            case AWSRekognitionUserStatusUpdating:
+                return @"UPDATING";
+            case AWSRekognitionUserStatusCreating:
+                return @"CREATING";
+            case AWSRekognitionUserStatusCreated:
+                return @"CREATED";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSRekognitionDisassociatedFace
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"faceId" : @"FaceId",
+             };
+}
+
+@end
+
 @implementation AWSRekognitionDistributeDataset
 
 + (BOOL)supportsSecureCoding {
@@ -2327,6 +2634,22 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 @end
 
+@implementation AWSRekognitionEyeDirection
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"confidence" : @"Confidence",
+             @"pitch" : @"Pitch",
+             @"yaw" : @"Yaw",
+             };
+}
+
+@end
+
 @implementation AWSRekognitionEyeOpen
 
 + (BOOL)supportsSecureCoding {
@@ -2371,6 +2694,7 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
              @"faceId" : @"FaceId",
              @"imageId" : @"ImageId",
              @"indexFacesModelVersion" : @"IndexFacesModelVersion",
+             @"userId" : @"UserId",
              };
 }
 
@@ -2393,8 +2717,10 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
              @"boundingBox" : @"BoundingBox",
              @"confidence" : @"Confidence",
              @"emotions" : @"Emotions",
+             @"eyeDirection" : @"EyeDirection",
              @"eyeglasses" : @"Eyeglasses",
              @"eyesOpen" : @"EyesOpen",
+             @"faceOccluded" : @"FaceOccluded",
              @"gender" : @"Gender",
              @"landmarks" : @"Landmarks",
              @"mouthOpen" : @"MouthOpen",
@@ -2422,12 +2748,20 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionEmotion class]];
 }
 
++ (NSValueTransformer *)eyeDirectionJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionEyeDirection class]];
+}
+
 + (NSValueTransformer *)eyeglassesJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionEyeglasses class]];
 }
 
 + (NSValueTransformer *)eyesOpenJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionEyeOpen class]];
+}
+
++ (NSValueTransformer *)faceOccludedJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionFaceOccluded class]];
 }
 
 + (NSValueTransformer *)genderJSONTransformer {
@@ -2498,6 +2832,21 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 + (NSValueTransformer *)faceJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionFace class]];
+}
+
+@end
+
+@implementation AWSRekognitionFaceOccluded
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"confidence" : @"Confidence",
+             @"value" : @"Value",
+             };
 }
 
 @end
@@ -2697,9 +3046,12 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"celebrities" : @"Celebrities",
+             @"jobId" : @"JobId",
              @"jobStatus" : @"JobStatus",
+             @"jobTag" : @"JobTag",
              @"nextToken" : @"NextToken",
              @"statusMessage" : @"StatusMessage",
+             @"video" : @"Video",
              @"videoMetadata" : @"VideoMetadata",
              };
 }
@@ -2734,6 +3086,10 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
     }];
 }
 
++ (NSValueTransformer *)videoJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionVideo class]];
+}
+
 + (NSValueTransformer *)videoMetadataJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionVideoMetadata class]];
 }
@@ -2748,11 +3104,90 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"aggregateBy" : @"AggregateBy",
              @"jobId" : @"JobId",
              @"maxResults" : @"MaxResults",
              @"nextToken" : @"NextToken",
              @"sortBy" : @"SortBy",
              };
+}
+
++ (NSValueTransformer *)aggregateByJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"TIMESTAMPS"] == NSOrderedSame) {
+            return @(AWSRekognitionContentModerationAggregateByTimestamps);
+        }
+        if ([value caseInsensitiveCompare:@"SEGMENTS"] == NSOrderedSame) {
+            return @(AWSRekognitionContentModerationAggregateBySegments);
+        }
+        return @(AWSRekognitionContentModerationAggregateByUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSRekognitionContentModerationAggregateByTimestamps:
+                return @"TIMESTAMPS";
+            case AWSRekognitionContentModerationAggregateBySegments:
+                return @"SEGMENTS";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)sortByJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"NAME"] == NSOrderedSame) {
+            return @(AWSRekognitionContentModerationSortByName);
+        }
+        if ([value caseInsensitiveCompare:@"TIMESTAMP"] == NSOrderedSame) {
+            return @(AWSRekognitionContentModerationSortByTimestamp);
+        }
+        return @(AWSRekognitionContentModerationSortByUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSRekognitionContentModerationSortByName:
+                return @"NAME";
+            case AWSRekognitionContentModerationSortByTimestamp:
+                return @"TIMESTAMP";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSRekognitionGetContentModerationRequestMetadata
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"aggregateBy" : @"AggregateBy",
+             @"sortBy" : @"SortBy",
+             };
+}
+
++ (NSValueTransformer *)aggregateByJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"TIMESTAMPS"] == NSOrderedSame) {
+            return @(AWSRekognitionContentModerationAggregateByTimestamps);
+        }
+        if ([value caseInsensitiveCompare:@"SEGMENTS"] == NSOrderedSame) {
+            return @(AWSRekognitionContentModerationAggregateBySegments);
+        }
+        return @(AWSRekognitionContentModerationAggregateByUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSRekognitionContentModerationAggregateByTimestamps:
+                return @"TIMESTAMPS";
+            case AWSRekognitionContentModerationAggregateBySegments:
+                return @"SEGMENTS";
+            default:
+                return nil;
+        }
+    }];
 }
 
 + (NSValueTransformer *)sortByJSONTransformer {
@@ -2786,13 +3221,21 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"getRequestMetadata" : @"GetRequestMetadata",
+             @"jobId" : @"JobId",
              @"jobStatus" : @"JobStatus",
+             @"jobTag" : @"JobTag",
              @"moderationLabels" : @"ModerationLabels",
              @"moderationModelVersion" : @"ModerationModelVersion",
              @"nextToken" : @"NextToken",
              @"statusMessage" : @"StatusMessage",
+             @"video" : @"Video",
              @"videoMetadata" : @"VideoMetadata",
              };
+}
+
++ (NSValueTransformer *)getRequestMetadataJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionGetContentModerationRequestMetadata class]];
 }
 
 + (NSValueTransformer *)jobStatusJSONTransformer {
@@ -2823,6 +3266,10 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 + (NSValueTransformer *)moderationLabelsJSONTransformer {
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionContentModerationDetection class]];
+}
+
++ (NSValueTransformer *)videoJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionVideo class]];
 }
 
 + (NSValueTransformer *)videoMetadataJSONTransformer {
@@ -2856,9 +3303,12 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"faces" : @"Faces",
+             @"jobId" : @"JobId",
              @"jobStatus" : @"JobStatus",
+             @"jobTag" : @"JobTag",
              @"nextToken" : @"NextToken",
              @"statusMessage" : @"StatusMessage",
+             @"video" : @"Video",
              @"videoMetadata" : @"VideoMetadata",
              };
 }
@@ -2893,8 +3343,88 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
     }];
 }
 
++ (NSValueTransformer *)videoJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionVideo class]];
+}
+
 + (NSValueTransformer *)videoMetadataJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionVideoMetadata class]];
+}
+
+@end
+
+@implementation AWSRekognitionGetFaceLivenessSessionResultsRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"sessionId" : @"SessionId",
+             };
+}
+
+@end
+
+@implementation AWSRekognitionGetFaceLivenessSessionResultsResponse
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"auditImages" : @"AuditImages",
+             @"confidence" : @"Confidence",
+             @"referenceImage" : @"ReferenceImage",
+             @"sessionId" : @"SessionId",
+             @"status" : @"Status",
+             };
+}
+
++ (NSValueTransformer *)auditImagesJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionAuditImage class]];
+}
+
++ (NSValueTransformer *)referenceImageJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionAuditImage class]];
+}
+
++ (NSValueTransformer *)statusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"CREATED"] == NSOrderedSame) {
+            return @(AWSRekognitionLivenessSessionStatusCreated);
+        }
+        if ([value caseInsensitiveCompare:@"IN_PROGRESS"] == NSOrderedSame) {
+            return @(AWSRekognitionLivenessSessionStatusInProgress);
+        }
+        if ([value caseInsensitiveCompare:@"SUCCEEDED"] == NSOrderedSame) {
+            return @(AWSRekognitionLivenessSessionStatusSucceeded);
+        }
+        if ([value caseInsensitiveCompare:@"FAILED"] == NSOrderedSame) {
+            return @(AWSRekognitionLivenessSessionStatusFailed);
+        }
+        if ([value caseInsensitiveCompare:@"EXPIRED"] == NSOrderedSame) {
+            return @(AWSRekognitionLivenessSessionStatusExpired);
+        }
+        return @(AWSRekognitionLivenessSessionStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSRekognitionLivenessSessionStatusCreated:
+                return @"CREATED";
+            case AWSRekognitionLivenessSessionStatusInProgress:
+                return @"IN_PROGRESS";
+            case AWSRekognitionLivenessSessionStatusSucceeded:
+                return @"SUCCEEDED";
+            case AWSRekognitionLivenessSessionStatusFailed:
+                return @"FAILED";
+            case AWSRekognitionLivenessSessionStatusExpired:
+                return @"EXPIRED";
+            default:
+                return nil;
+        }
+    }];
 }
 
 @end
@@ -2945,10 +3475,13 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"jobId" : @"JobId",
              @"jobStatus" : @"JobStatus",
+             @"jobTag" : @"JobTag",
              @"nextToken" : @"NextToken",
              @"persons" : @"Persons",
              @"statusMessage" : @"StatusMessage",
+             @"video" : @"Video",
              @"videoMetadata" : @"VideoMetadata",
              };
 }
@@ -2981,6 +3514,10 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 + (NSValueTransformer *)personsJSONTransformer {
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionPersonMatch class]];
+}
+
++ (NSValueTransformer *)videoJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionVideo class]];
 }
 
 + (NSValueTransformer *)videoMetadataJSONTransformer {
@@ -3049,6 +3586,63 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 @end
 
+@implementation AWSRekognitionGetLabelDetectionRequestMetadata
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"aggregateBy" : @"AggregateBy",
+             @"sortBy" : @"SortBy",
+             };
+}
+
++ (NSValueTransformer *)aggregateByJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"TIMESTAMPS"] == NSOrderedSame) {
+            return @(AWSRekognitionLabelDetectionAggregateByTimestamps);
+        }
+        if ([value caseInsensitiveCompare:@"SEGMENTS"] == NSOrderedSame) {
+            return @(AWSRekognitionLabelDetectionAggregateBySegments);
+        }
+        return @(AWSRekognitionLabelDetectionAggregateByUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSRekognitionLabelDetectionAggregateByTimestamps:
+                return @"TIMESTAMPS";
+            case AWSRekognitionLabelDetectionAggregateBySegments:
+                return @"SEGMENTS";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)sortByJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"NAME"] == NSOrderedSame) {
+            return @(AWSRekognitionLabelDetectionSortByName);
+        }
+        if ([value caseInsensitiveCompare:@"TIMESTAMP"] == NSOrderedSame) {
+            return @(AWSRekognitionLabelDetectionSortByTimestamp);
+        }
+        return @(AWSRekognitionLabelDetectionSortByUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSRekognitionLabelDetectionSortByName:
+                return @"NAME";
+            case AWSRekognitionLabelDetectionSortByTimestamp:
+                return @"TIMESTAMP";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
 @implementation AWSRekognitionGetLabelDetectionResponse
 
 + (BOOL)supportsSecureCoding {
@@ -3057,13 +3651,21 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"getRequestMetadata" : @"GetRequestMetadata",
+             @"jobId" : @"JobId",
              @"jobStatus" : @"JobStatus",
+             @"jobTag" : @"JobTag",
              @"labelModelVersion" : @"LabelModelVersion",
              @"labels" : @"Labels",
              @"nextToken" : @"NextToken",
              @"statusMessage" : @"StatusMessage",
+             @"video" : @"Video",
              @"videoMetadata" : @"VideoMetadata",
              };
+}
+
++ (NSValueTransformer *)getRequestMetadataJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionGetLabelDetectionRequestMetadata class]];
 }
 
 + (NSValueTransformer *)jobStatusJSONTransformer {
@@ -3094,6 +3696,10 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 + (NSValueTransformer *)labelsJSONTransformer {
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionLabelDetection class]];
+}
+
++ (NSValueTransformer *)videoJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionVideo class]];
 }
 
 + (NSValueTransformer *)videoMetadataJSONTransformer {
@@ -3148,10 +3754,13 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"jobId" : @"JobId",
              @"jobStatus" : @"JobStatus",
+             @"jobTag" : @"JobTag",
              @"nextToken" : @"NextToken",
              @"persons" : @"Persons",
              @"statusMessage" : @"StatusMessage",
+             @"video" : @"Video",
              @"videoMetadata" : @"VideoMetadata",
              };
 }
@@ -3186,6 +3795,10 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionPersonDetection class]];
 }
 
++ (NSValueTransformer *)videoJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionVideo class]];
+}
+
 + (NSValueTransformer *)videoMetadataJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionVideoMetadata class]];
 }
@@ -3217,11 +3830,14 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"audioMetadata" : @"AudioMetadata",
+             @"jobId" : @"JobId",
              @"jobStatus" : @"JobStatus",
+             @"jobTag" : @"JobTag",
              @"nextToken" : @"NextToken",
              @"segments" : @"Segments",
              @"selectedSegmentTypes" : @"SelectedSegmentTypes",
              @"statusMessage" : @"StatusMessage",
+             @"video" : @"Video",
              @"videoMetadata" : @"VideoMetadata",
              };
 }
@@ -3264,6 +3880,10 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionSegmentTypeInfo class]];
 }
 
++ (NSValueTransformer *)videoJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionVideo class]];
+}
+
 + (NSValueTransformer *)videoMetadataJSONTransformer {
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionVideoMetadata class]];
 }
@@ -3294,11 +3914,14 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"jobId" : @"JobId",
              @"jobStatus" : @"JobStatus",
+             @"jobTag" : @"JobTag",
              @"nextToken" : @"NextToken",
              @"statusMessage" : @"StatusMessage",
              @"textDetections" : @"TextDetections",
              @"textModelVersion" : @"TextModelVersion",
+             @"video" : @"Video",
              @"videoMetadata" : @"VideoMetadata",
              };
 }
@@ -3331,6 +3954,10 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 + (NSValueTransformer *)textDetectionsJSONTransformer {
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionTextDetectionResult class]];
+}
+
++ (NSValueTransformer *)videoJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionVideo class]];
 }
 
 + (NSValueTransformer *)videoMetadataJSONTransformer {
@@ -4058,8 +4685,10 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"collectionId" : @"CollectionId",
+             @"faceIds" : @"FaceIds",
              @"maxResults" : @"MaxResults",
              @"nextToken" : @"NextToken",
+             @"userId" : @"UserId",
              };
 }
 
@@ -4178,6 +4807,102 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 	return @{
              @"tags" : @"Tags",
              };
+}
+
+@end
+
+@implementation AWSRekognitionListUsersRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"collectionId" : @"CollectionId",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
+             };
+}
+
+@end
+
+@implementation AWSRekognitionListUsersResponse
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"nextToken" : @"NextToken",
+             @"users" : @"Users",
+             };
+}
+
++ (NSValueTransformer *)usersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionUser class]];
+}
+
+@end
+
+@implementation AWSRekognitionLivenessOutputConfig
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"s3Bucket" : @"S3Bucket",
+             @"s3KeyPrefix" : @"S3KeyPrefix",
+             };
+}
+
+@end
+
+@implementation AWSRekognitionMatchedUser
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"userId" : @"UserId",
+             @"userStatus" : @"UserStatus",
+             };
+}
+
++ (NSValueTransformer *)userStatusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"ACTIVE"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusActive);
+        }
+        if ([value caseInsensitiveCompare:@"UPDATING"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusUpdating);
+        }
+        if ([value caseInsensitiveCompare:@"CREATING"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusCreating);
+        }
+        if ([value caseInsensitiveCompare:@"CREATED"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusCreated);
+        }
+        return @(AWSRekognitionUserStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSRekognitionUserStatusActive:
+                return @"ACTIVE";
+            case AWSRekognitionUserStatusUpdating:
+                return @"UPDATING";
+            case AWSRekognitionUserStatusCreating:
+                return @"CREATING";
+            case AWSRekognitionUserStatusCreated:
+                return @"CREATED";
+            default:
+                return nil;
+        }
+    }];
 }
 
 @end
@@ -4976,6 +5701,186 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 + (NSValueTransformer *)faceMatchesJSONTransformer {
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionFaceMatch class]];
+}
+
+@end
+
+@implementation AWSRekognitionSearchUsersByImageRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"collectionId" : @"CollectionId",
+             @"image" : @"Image",
+             @"maxUsers" : @"MaxUsers",
+             @"qualityFilter" : @"QualityFilter",
+             @"userMatchThreshold" : @"UserMatchThreshold",
+             };
+}
+
++ (NSValueTransformer *)imageJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionImage class]];
+}
+
++ (NSValueTransformer *)qualityFilterJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"NONE"] == NSOrderedSame) {
+            return @(AWSRekognitionQualityFilterNone);
+        }
+        if ([value caseInsensitiveCompare:@"AUTO"] == NSOrderedSame) {
+            return @(AWSRekognitionQualityFilterAuto);
+        }
+        if ([value caseInsensitiveCompare:@"LOW"] == NSOrderedSame) {
+            return @(AWSRekognitionQualityFilterLow);
+        }
+        if ([value caseInsensitiveCompare:@"MEDIUM"] == NSOrderedSame) {
+            return @(AWSRekognitionQualityFilterMedium);
+        }
+        if ([value caseInsensitiveCompare:@"HIGH"] == NSOrderedSame) {
+            return @(AWSRekognitionQualityFilterHigh);
+        }
+        return @(AWSRekognitionQualityFilterUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSRekognitionQualityFilterNone:
+                return @"NONE";
+            case AWSRekognitionQualityFilterAuto:
+                return @"AUTO";
+            case AWSRekognitionQualityFilterLow:
+                return @"LOW";
+            case AWSRekognitionQualityFilterMedium:
+                return @"MEDIUM";
+            case AWSRekognitionQualityFilterHigh:
+                return @"HIGH";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSRekognitionSearchUsersByImageResponse
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"faceModelVersion" : @"FaceModelVersion",
+             @"searchedFace" : @"SearchedFace",
+             @"unsearchedFaces" : @"UnsearchedFaces",
+             @"userMatches" : @"UserMatches",
+             };
+}
+
++ (NSValueTransformer *)searchedFaceJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionSearchedFaceDetails class]];
+}
+
++ (NSValueTransformer *)unsearchedFacesJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionUnsearchedFace class]];
+}
+
++ (NSValueTransformer *)userMatchesJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionUserMatch class]];
+}
+
+@end
+
+@implementation AWSRekognitionSearchUsersRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"collectionId" : @"CollectionId",
+             @"faceId" : @"FaceId",
+             @"maxUsers" : @"MaxUsers",
+             @"userId" : @"UserId",
+             @"userMatchThreshold" : @"UserMatchThreshold",
+             };
+}
+
+@end
+
+@implementation AWSRekognitionSearchUsersResponse
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"faceModelVersion" : @"FaceModelVersion",
+             @"searchedFace" : @"SearchedFace",
+             @"searchedUser" : @"SearchedUser",
+             @"userMatches" : @"UserMatches",
+             };
+}
+
++ (NSValueTransformer *)searchedFaceJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionSearchedFace class]];
+}
+
++ (NSValueTransformer *)searchedUserJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionSearchedUser class]];
+}
+
++ (NSValueTransformer *)userMatchesJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSRekognitionUserMatch class]];
+}
+
+@end
+
+@implementation AWSRekognitionSearchedFace
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"faceId" : @"FaceId",
+             };
+}
+
+@end
+
+@implementation AWSRekognitionSearchedFaceDetails
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"faceDetail" : @"FaceDetail",
+             };
+}
+
++ (NSValueTransformer *)faceDetailJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionFaceDetail class]];
+}
+
+@end
+
+@implementation AWSRekognitionSearchedUser
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"userId" : @"UserId",
+             };
 }
 
 @end
@@ -6284,6 +7189,74 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 @end
 
+@implementation AWSRekognitionUnsearchedFace
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"faceDetails" : @"FaceDetails",
+             @"reasons" : @"Reasons",
+             };
+}
+
++ (NSValueTransformer *)faceDetailsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionFaceDetail class]];
+}
+
+@end
+
+@implementation AWSRekognitionUnsuccessfulFaceAssociation
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"confidence" : @"Confidence",
+             @"faceId" : @"FaceId",
+             @"reasons" : @"Reasons",
+             @"userId" : @"UserId",
+             };
+}
+
+@end
+
+@implementation AWSRekognitionUnsuccessfulFaceDeletion
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"faceId" : @"FaceId",
+             @"reasons" : @"Reasons",
+             @"userId" : @"UserId",
+             };
+}
+
+@end
+
+@implementation AWSRekognitionUnsuccessfulFaceDisassociation
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"faceId" : @"FaceId",
+             @"reasons" : @"Reasons",
+             @"userId" : @"UserId",
+             };
+}
+
+@end
+
 @implementation AWSRekognitionUntagResourceRequest
 
 + (BOOL)supportsSecureCoding {
@@ -6368,6 +7341,71 @@ NSString *const AWSRekognitionErrorDomain = @"com.amazonaws.AWSRekognitionErrorD
 
 + (BOOL)supportsSecureCoding {
     return YES;
+}
+
+@end
+
+@implementation AWSRekognitionUser
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"userId" : @"UserId",
+             @"userStatus" : @"UserStatus",
+             };
+}
+
++ (NSValueTransformer *)userStatusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"ACTIVE"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusActive);
+        }
+        if ([value caseInsensitiveCompare:@"UPDATING"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusUpdating);
+        }
+        if ([value caseInsensitiveCompare:@"CREATING"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusCreating);
+        }
+        if ([value caseInsensitiveCompare:@"CREATED"] == NSOrderedSame) {
+            return @(AWSRekognitionUserStatusCreated);
+        }
+        return @(AWSRekognitionUserStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSRekognitionUserStatusActive:
+                return @"ACTIVE";
+            case AWSRekognitionUserStatusUpdating:
+                return @"UPDATING";
+            case AWSRekognitionUserStatusCreating:
+                return @"CREATING";
+            case AWSRekognitionUserStatusCreated:
+                return @"CREATED";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSRekognitionUserMatch
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"similarity" : @"Similarity",
+             @"user" : @"User",
+             };
+}
+
++ (NSValueTransformer *)userJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSRekognitionMatchedUser class]];
 }
 
 @end

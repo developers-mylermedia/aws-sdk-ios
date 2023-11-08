@@ -45,6 +45,7 @@ typedef NS_ENUM(NSInteger, AWSIoTErrorType) {
     AWSIoTErrorResourceAlreadyExists,
     AWSIoTErrorResourceNotFound,
     AWSIoTErrorResourceRegistrationFailure,
+    AWSIoTErrorServiceQuotaExceeded,
     AWSIoTErrorServiceUnavailable,
     AWSIoTErrorSqlParse,
     AWSIoTErrorTaskAlreadyExists,
@@ -52,6 +53,7 @@ typedef NS_ENUM(NSInteger, AWSIoTErrorType) {
     AWSIoTErrorTransferAlreadyCompleted,
     AWSIoTErrorTransferConflict,
     AWSIoTErrorUnauthorized,
+    AWSIoTErrorValidation,
     AWSIoTErrorVersionConflict,
     AWSIoTErrorVersionsLimitExceeded,
 };
@@ -475,6 +477,21 @@ typedef NS_ENUM(NSInteger, AWSIoTOTAUpdateStatus) {
     AWSIoTOTAUpdateStatusCreateInProgress,
     AWSIoTOTAUpdateStatusCreateComplete,
     AWSIoTOTAUpdateStatusCreateFailed,
+    AWSIoTOTAUpdateStatusDeleteInProgress,
+    AWSIoTOTAUpdateStatusDeleteFailed,
+};
+
+typedef NS_ENUM(NSInteger, AWSIoTPackageVersionAction) {
+    AWSIoTPackageVersionActionUnknown,
+    AWSIoTPackageVersionActionPublish,
+    AWSIoTPackageVersionActionDeprecate,
+};
+
+typedef NS_ENUM(NSInteger, AWSIoTPackageVersionStatus) {
+    AWSIoTPackageVersionStatusUnknown,
+    AWSIoTPackageVersionStatusDraft,
+    AWSIoTPackageVersionStatusPublished,
+    AWSIoTPackageVersionStatusDeprecated,
 };
 
 typedef NS_ENUM(NSInteger, AWSIoTPolicyTemplateName) {
@@ -697,6 +714,10 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @class AWSIoTCreateMitigationActionResponse;
 @class AWSIoTCreateOTAUpdateRequest;
 @class AWSIoTCreateOTAUpdateResponse;
+@class AWSIoTCreatePackageRequest;
+@class AWSIoTCreatePackageResponse;
+@class AWSIoTCreatePackageVersionRequest;
+@class AWSIoTCreatePackageVersionResponse;
 @class AWSIoTCreatePolicyRequest;
 @class AWSIoTCreatePolicyResponse;
 @class AWSIoTCreatePolicyVersionRequest;
@@ -752,6 +773,10 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @class AWSIoTDeleteMitigationActionResponse;
 @class AWSIoTDeleteOTAUpdateRequest;
 @class AWSIoTDeleteOTAUpdateResponse;
+@class AWSIoTDeletePackageRequest;
+@class AWSIoTDeletePackageResponse;
+@class AWSIoTDeletePackageVersionRequest;
+@class AWSIoTDeletePackageVersionResponse;
 @class AWSIoTDeletePolicyRequest;
 @class AWSIoTDeletePolicyVersionRequest;
 @class AWSIoTDeleteProvisioningTemplateRequest;
@@ -890,6 +915,12 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @class AWSIoTGetLoggingOptionsResponse;
 @class AWSIoTGetOTAUpdateRequest;
 @class AWSIoTGetOTAUpdateResponse;
+@class AWSIoTGetPackageConfigurationRequest;
+@class AWSIoTGetPackageConfigurationResponse;
+@class AWSIoTGetPackageRequest;
+@class AWSIoTGetPackageResponse;
+@class AWSIoTGetPackageVersionRequest;
+@class AWSIoTGetPackageVersionResponse;
 @class AWSIoTGetPercentilesRequest;
 @class AWSIoTGetPercentilesResponse;
 @class AWSIoTGetPolicyRequest;
@@ -991,6 +1022,10 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @class AWSIoTListOTAUpdatesResponse;
 @class AWSIoTListOutgoingCertificatesRequest;
 @class AWSIoTListOutgoingCertificatesResponse;
+@class AWSIoTListPackageVersionsRequest;
+@class AWSIoTListPackageVersionsResponse;
+@class AWSIoTListPackagesRequest;
+@class AWSIoTListPackagesResponse;
 @class AWSIoTListPoliciesRequest;
 @class AWSIoTListPoliciesResponse;
 @class AWSIoTListPolicyPrincipalsRequest;
@@ -1072,6 +1107,8 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @class AWSIoTOTAUpdateSummary;
 @class AWSIoTOpenSearchAction;
 @class AWSIoTOutgoingCertificate;
+@class AWSIoTPackageSummary;
+@class AWSIoTPackageVersionSummary;
 @class AWSIoTPercentPair;
 @class AWSIoTPolicy;
 @class AWSIoTPolicyVersion;
@@ -1173,6 +1210,7 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @class AWSIoTTimestreamAction;
 @class AWSIoTTimestreamDimension;
 @class AWSIoTTimestreamTimestamp;
+@class AWSIoTTlsConfig;
 @class AWSIoTTlsContext;
 @class AWSIoTTopicRule;
 @class AWSIoTTopicRuleDestination;
@@ -1213,6 +1251,12 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @class AWSIoTUpdateJobRequest;
 @class AWSIoTUpdateMitigationActionRequest;
 @class AWSIoTUpdateMitigationActionResponse;
+@class AWSIoTUpdatePackageConfigurationRequest;
+@class AWSIoTUpdatePackageConfigurationResponse;
+@class AWSIoTUpdatePackageRequest;
+@class AWSIoTUpdatePackageResponse;
+@class AWSIoTUpdatePackageVersionRequest;
+@class AWSIoTUpdatePackageVersionResponse;
 @class AWSIoTUpdateProvisioningTemplateRequest;
 @class AWSIoTUpdateProvisioningTemplateResponse;
 @class AWSIoTUpdateRoleAliasRequest;
@@ -1235,6 +1279,7 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @class AWSIoTValidateSecurityProfileBehaviorsRequest;
 @class AWSIoTValidateSecurityProfileBehaviorsResponse;
 @class AWSIoTValidationError;
+@class AWSIoTVersionUpdateByJobsConfig;
 @class AWSIoTViolationEvent;
 @class AWSIoTViolationEventAdditionalInfo;
 @class AWSIoTViolationEventOccurrenceRange;
@@ -3528,6 +3573,11 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @property (nonatomic, strong) NSArray<AWSIoTTag *> * _Nullable tags;
 
 /**
+ <p>An object that specifies the TLS configuration for a domain.</p>
+ */
+@property (nonatomic, strong) AWSIoTTlsConfig * _Nullable tlsConfig;
+
+/**
  <p>The certificate used to validate the server certificate and prove domain name ownership. This certificate must be signed by a public certificate authority. This value is not required for Amazon Web Services-managed domains.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable validationCertificateArn;
@@ -3721,6 +3771,11 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @property (nonatomic, strong) NSString * _Nullable detail;
 
 /**
+ <p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p><p><b>Note:</b>The following Length Constraints relates to a single string. Up to five strings are allowed.</p>
+ */
+@property (nonatomic, strong) NSArray<NSString *> * _Nullable destinationPackageVersions;
+
+/**
  <p>The job document. Required if you don't specify a value for <code>documentSource</code>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable document;
@@ -3731,7 +3786,7 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable documentParameters;
 
 /**
- <p>An S3 link to the job document. Required if you don't specify a value for <code>document</code>.</p><note><p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p><p>The placeholder link is of the following form:</p><p><code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code></p><p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p></note>
+ <p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don't specify a value for <code>document</code>.</p><p>For example, <code>--document-source https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code></p><p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html">Methods for accessing a bucket</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable documentSource;
 
@@ -3830,6 +3885,11 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
  <p>A description of the job document.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable detail;
+
+/**
+ <p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p><p><b>Note:</b>The following Length Constraints relates to a single string. Up to five strings are allowed.</p>
+ */
+@property (nonatomic, strong) NSArray<NSString *> * _Nullable destinationPackageVersions;
 
 /**
  <p>The job document. Required if you don't specify a value for <code>documentSource</code>.</p>
@@ -4091,6 +4151,138 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
  <p>The OTA update status.</p>
  */
 @property (nonatomic, assign) AWSIoTOTAUpdateStatus otaUpdateStatus;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTCreatePackageRequest : AWSRequest
+
+
+/**
+ <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable clientToken;
+
+/**
+ <p>A summary of the package being created. This can be used to outline the package's contents or purpose.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable detail;
+
+/**
+ <p>The name of the new package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+/**
+ <p>Metadata that can be used to manage the package.</p>
+ */
+@property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable tags;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTCreatePackageResponse : AWSModel
+
+
+/**
+ <p>The package description.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable detail;
+
+/**
+ <p>The Amazon Resource Name (ARN) for the package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageArn;
+
+/**
+ <p>The name of the package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTCreatePackageVersionRequest : AWSRequest
+
+
+/**
+ <p>Metadata that can be used to define a package version’s configuration. For example, the S3 file location, configuration options that are being sent to the device or fleet.</p><p>The combined size of all the attributes on a package version is limited to 3KB.</p>
+ */
+@property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable attributes;
+
+/**
+ <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable clientToken;
+
+/**
+ <p>A summary of the package version being created. This can be used to outline the package's contents or purpose.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable detail;
+
+/**
+ <p>The name of the associated package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+/**
+ <p>Metadata that can be used to manage the package version.</p>
+ */
+@property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable tags;
+
+/**
+ <p>The name of the new package version.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable versionName;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTCreatePackageVersionResponse : AWSModel
+
+
+/**
+ <p>Metadata that were added to the package version that can be used to define a package version’s configuration.</p>
+ */
+@property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable attributes;
+
+/**
+ <p>The package version description.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable detail;
+
+/**
+ <p>Error reason for a package version failure during creation or update.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable errorReason;
+
+/**
+ <p>The name of the associated package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+/**
+ <p>The Amazon Resource Name (ARN) for the package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageVersionArn;
+
+/**
+ <p>The status of the package version. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle">Package version lifecycle</a>.</p>
+ */
+@property (nonatomic, assign) AWSIoTPackageVersionStatus status;
+
+/**
+ <p>The name of the new package version.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable versionName;
 
 @end
 
@@ -5172,6 +5364,63 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @end
 
 /**
+ 
+ */
+@interface AWSIoTDeletePackageRequest : AWSRequest
+
+
+/**
+ <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable clientToken;
+
+/**
+ <p>The name of the target package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTDeletePackageResponse : AWSModel
+
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTDeletePackageVersionRequest : AWSRequest
+
+
+/**
+ <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable clientToken;
+
+/**
+ <p>The name of the associated package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+/**
+ <p>The name of the target package version.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable versionName;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTDeletePackageVersionResponse : AWSModel
+
+
+@end
+
+/**
  <p>The input for the DeletePolicy operation.</p>
  Required parameters: [policyName]
  */
@@ -6093,6 +6342,11 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
  */
 @property (nonatomic, assign) AWSIoTServiceType serviceType;
 
+/**
+ <p>An object that specifies the TLS configuration for a domain.</p>
+ */
+@property (nonatomic, strong) AWSIoTTlsConfig * _Nullable tlsConfig;
+
 @end
 
 /**
@@ -6374,6 +6628,11 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
  <p>A description of the job template.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable detail;
+
+/**
+ <p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p><p><b>Note:</b>The following Length Constraints relates to a single string. Up to five strings are allowed.</p>
+ */
+@property (nonatomic, strong) NSArray<NSString *> * _Nullable destinationPackageVersions;
 
 /**
  <p>The job document.</p>
@@ -8013,6 +8272,149 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 /**
  
  */
+@interface AWSIoTGetPackageConfigurationRequest : AWSRequest
+
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTGetPackageConfigurationResponse : AWSModel
+
+
+/**
+ <p>The version that is associated to a specific job.</p>
+ */
+@property (nonatomic, strong) AWSIoTVersionUpdateByJobsConfig * _Nullable versionUpdateByJobsConfig;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTGetPackageRequest : AWSRequest
+
+
+/**
+ <p>The name of the target package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTGetPackageResponse : AWSModel
+
+
+/**
+ <p>The date the package was created.</p>
+ */
+@property (nonatomic, strong) NSDate * _Nullable creationDate;
+
+/**
+ <p>The name of the default package version.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable defaultVersionName;
+
+/**
+ <p>The package description.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable detail;
+
+/**
+ <p>The date when the package was last updated.</p>
+ */
+@property (nonatomic, strong) NSDate * _Nullable lastModifiedDate;
+
+/**
+ <p>The ARN for the package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageArn;
+
+/**
+ <p>The name of the package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTGetPackageVersionRequest : AWSRequest
+
+
+/**
+ <p>The name of the associated package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+/**
+ <p>The name of the target package version.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable versionName;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTGetPackageVersionResponse : AWSModel
+
+
+/**
+ <p>Metadata that were added to the package version that can be used to define a package version’s configuration.</p>
+ */
+@property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable attributes;
+
+/**
+ <p>The date when the package version was created.</p>
+ */
+@property (nonatomic, strong) NSDate * _Nullable creationDate;
+
+/**
+ <p>The package version description.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable detail;
+
+/**
+ <p>Error reason for a package version failure during creation or update.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable errorReason;
+
+/**
+ <p>The date when the package version was last updated.</p>
+ */
+@property (nonatomic, strong) NSDate * _Nullable lastModifiedDate;
+
+/**
+ <p>The name of the package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+/**
+ <p>The ARN for the package version.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageVersionArn;
+
+/**
+ <p>The status associated to the package version. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle">Package version lifecycle</a>.</p>
+ */
+@property (nonatomic, assign) AWSIoTPackageVersionStatus status;
+
+/**
+ <p>The name of the package version.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable versionName;
+
+@end
+
+/**
+ 
+ */
 @interface AWSIoTGetPercentilesRequest : AWSRequest
 
 
@@ -8623,6 +9025,11 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
  <p>A short text description of the job.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable detail;
+
+/**
+ <p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p><p><b>Note:</b>The following Length Constraints relates to a single string. Up to five strings are allowed.</p>
+ */
+@property (nonatomic, strong) NSArray<NSString *> * _Nullable destinationPackageVersions;
 
 /**
  <p>A key-value map that pairs the patterns that need to be replaced in a managed template job document schema. You can use the description of each key as a guidance to specify the inputs during runtime when creating a job.</p><note><p><code>documentParameters</code> can only be used when creating jobs from Amazon Web Services managed templates. This parameter can't be used with custom job templates or to create jobs from them.</p></note>
@@ -10458,6 +10865,88 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
  <p>The certificates that are being transferred but not yet accepted.</p>
  */
 @property (nonatomic, strong) NSArray<AWSIoTOutgoingCertificate *> * _Nullable outgoingCertificates;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTListPackageVersionsRequest : AWSRequest
+
+
+/**
+ <p>The maximum number of results to return at one time.</p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable maxResults;
+
+/**
+ <p>The token for the next set of results.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable nextToken;
+
+/**
+ <p>The name of the target package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+/**
+ <p>The status of the package version. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle">Package version lifecycle</a>.</p>
+ */
+@property (nonatomic, assign) AWSIoTPackageVersionStatus status;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTListPackageVersionsResponse : AWSModel
+
+
+/**
+ <p>The token for the next set of results.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable nextToken;
+
+/**
+ <p>Lists the package versions associated to the package.</p>
+ */
+@property (nonatomic, strong) NSArray<AWSIoTPackageVersionSummary *> * _Nullable packageVersionSummaries;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTListPackagesRequest : AWSRequest
+
+
+/**
+ <p>The maximum number of results returned at one time.</p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable maxResults;
+
+/**
+ <p>The token for the next set of results.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable nextToken;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTListPackagesResponse : AWSModel
+
+
+/**
+ <p>The token for the next set of results.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable nextToken;
+
+/**
+ <p>The software package summary.</p>
+ */
+@property (nonatomic, strong) NSArray<AWSIoTPackageSummary *> * _Nullable packageSummaries;
 
 @end
 
@@ -12384,6 +12873,67 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @end
 
 /**
+ <p>A summary of information about a software package.</p>
+ */
+@interface AWSIoTPackageSummary : AWSModel
+
+
+/**
+ <p>The date that the package was created.</p>
+ */
+@property (nonatomic, strong) NSDate * _Nullable creationDate;
+
+/**
+ <p>The name of the default package version.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable defaultVersionName;
+
+/**
+ <p>The date that the package was last updated.</p>
+ */
+@property (nonatomic, strong) NSDate * _Nullable lastModifiedDate;
+
+/**
+ <p>The name for the target package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+@end
+
+/**
+ <p>A summary of information about a package version.</p>
+ */
+@interface AWSIoTPackageVersionSummary : AWSModel
+
+
+/**
+ <p>The date that the package version was created.</p>
+ */
+@property (nonatomic, strong) NSDate * _Nullable creationDate;
+
+/**
+ <p>The date that the package version was last updated.</p>
+ */
+@property (nonatomic, strong) NSDate * _Nullable lastModifiedDate;
+
+/**
+ <p>The name of the associated software package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+/**
+ <p>The status of the package version. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle">Package version lifecycle</a>.</p>
+ */
+@property (nonatomic, assign) AWSIoTPackageVersionStatus status;
+
+/**
+ <p>The name of the target package version.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable versionName;
+
+@end
+
+/**
  <p>Describes the percentile and percentile value.</p>
  */
 @interface AWSIoTPercentPair : AWSModel
@@ -12472,7 +13022,7 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @property (nonatomic, strong) NSNumber * _Nullable expiresInSec;
 
 /**
- <p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p><important><p>For information about addressing the confused deputy problem, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p></important>
+ <p>The ARN of an IAM role that grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p><important><p>For information about addressing the confused deputy problem, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p></important>
  */
 @property (nonatomic, strong) NSString * _Nullable roleArn;
 
@@ -14729,6 +15279,19 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
 @end
 
 /**
+ <p>An object that specifies the TLS configuration for a domain.</p>
+ */
+@interface AWSIoTTlsConfig : AWSModel
+
+
+/**
+ <p>The security policy for a domain configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html#tls-policy-table">Security policies </a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable securityPolicy;
+
+@end
+
+/**
  <p>Specifies the TLS context to use for the test authorizer request.</p>
  */
 @interface AWSIoTTlsContext : AWSModel
@@ -15444,6 +16007,11 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
  */
 @property (nonatomic, strong) NSNumber * _Nullable removeAuthorizerConfig;
 
+/**
+ <p>An object that specifies the TLS configuration for a domain.</p>
+ */
+@property (nonatomic, strong) AWSIoTTlsConfig * _Nullable tlsConfig;
+
 @end
 
 /**
@@ -15706,6 +16274,119 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
  <p>A unique identifier for the mitigation action.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable actionId;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTUpdatePackageConfigurationRequest : AWSRequest
+
+
+/**
+ <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable clientToken;
+
+/**
+ <p>Configuration to manage job's package version reporting. This updates the thing's reserved named shadow that the job targets.</p>
+ */
+@property (nonatomic, strong) AWSIoTVersionUpdateByJobsConfig * _Nullable versionUpdateByJobsConfig;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTUpdatePackageConfigurationResponse : AWSModel
+
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTUpdatePackageRequest : AWSRequest
+
+
+/**
+ <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable clientToken;
+
+/**
+ <p>The name of the default package version.</p><p><b>Note:</b> You cannot name a <code>defaultVersion</code> and set <code>unsetDefaultVersion</code> equal to <code>true</code> at the same time.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable defaultVersionName;
+
+/**
+ <p>The package description.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable detail;
+
+/**
+ <p>The name of the target package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+/**
+ <p>Indicates whether you want to remove the named default package version from the software package. Set as <code>true</code> to remove the default package version. </p><p><b>Note:</b> You cannot name a <code>defaultVersion</code> and set <code>unsetDefaultVersion</code> equal to <code>true</code> at the same time.</p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable unsetDefaultVersion;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTUpdatePackageResponse : AWSModel
+
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTUpdatePackageVersionRequest : AWSRequest
+
+
+/**
+ <p>The status that the package version should be assigned. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle">Package version lifecycle</a>.</p>
+ */
+@property (nonatomic, assign) AWSIoTPackageVersionAction action;
+
+/**
+ <p>Metadata that can be used to define a package version’s configuration. For example, the S3 file location, configuration options that are being sent to the device or fleet. </p><p><b>Note:</b> Attributes can be updated only when the package version is in a draft state.</p><p>The combined size of all the attributes on a package version is limited to 3KB.</p>
+ */
+@property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable attributes;
+
+/**
+ <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable clientToken;
+
+/**
+ <p>The package version description.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable detail;
+
+/**
+ <p>The name of the associated software package.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable packageName;
+
+/**
+ <p>The name of the target package version.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable versionName;
+
+@end
+
+/**
+ 
+ */
+@interface AWSIoTUpdatePackageVersionResponse : AWSModel
+
 
 @end
 
@@ -16219,6 +16900,24 @@ typedef NS_ENUM(NSInteger, AWSIoTViolationEventType) {
  <p>The description of an error found in the behaviors.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable errorMessage;
+
+@end
+
+/**
+ <p>Configuration to manage IoT Job's package version reporting. If configured, Jobs updates the thing's reserved named shadow with the package version information up on successful job completion.</p><p><b>Note:</b> For each job, the destinationPackageVersions attribute has to be set with the correct data for Jobs to report to the thing shadow. </p>
+ */
+@interface AWSIoTVersionUpdateByJobsConfig : AWSModel
+
+
+/**
+ <p>Indicates whether the Job is enabled or not.</p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable enabled;
+
+/**
+ <p>The Amazon Resource Name (ARN) of the role that grants permission to the IoT jobs service to update the reserved named shadow when the job successfully completes.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable roleArn;
 
 @end
 

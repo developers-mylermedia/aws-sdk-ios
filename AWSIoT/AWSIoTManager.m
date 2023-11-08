@@ -141,6 +141,11 @@ static BOOL _tagCertificateEnabled = NO;
     return self;
 }
 
++ (NSString *)certTagWithCertificateId:(NSString *)certificateId {
+    // tagCertificateEnabled property defaults to legacy behavior
+    return [AWSIoTKeychain.certTag stringByAppendingString: AWSIoTManager.tagCertificateEnabled ? certificateId : @""];
+}
+
 - (void)createKeysAndCertificateFromCsr:(NSDictionary<NSString *, NSString*> *)csrDictionary callback:(void (^)(AWSIoTCreateCertificateResponse *mainResponse))callback {
     NSString *commonName = [csrDictionary objectForKey:@"commonName"];
     NSString *countryName = [csrDictionary objectForKey:@"countryName"];
@@ -197,7 +202,7 @@ static BOOL _tagCertificateEnabled = NO;
                 NSString *newPrivateTag = [AWSIoTKeychain.privateKeyTag stringByAppendingString:certificateId];
 
                 // tagCertificateEnabled property defaults to legacy behavior
-                NSString *newCertTag = [AWSIoTKeychain.certTag stringByAppendingString: AWSIoTManager.tagCertificateEnabled ? certificateId : @""];
+                NSString *newCertTag = [AWSIoTManager certTagWithCertificateId:certificateId];
 
                 SecKeyRef publicKeyRef = [AWSIoTKeychain getPublicKeyRef:publicTag];
                 SecKeyRef privateKeyRef = [AWSIoTKeychain getPrivateKeyRef:privateTag];
@@ -206,7 +211,7 @@ static BOOL _tagCertificateEnabled = NO;
                     [AWSIoTKeychain addPrivateKeyRef:privateKeyRef tag:newPrivateTag] &&
                     [AWSIoTKeychain addPublicKeyRef:publicKeyRef tag:newPublicTag] &&
                     [AWSIoTKeychain addCertificateToKeychain:certificatePem tag:newCertTag] &&
-                    [AWSIoTKeychain getIdentityRef:newPrivateTag] != nil) {
+                    [AWSIoTKeychain getIdentityRef:newPrivateTag certificateLabel:newCertTag] != nil) {
                     AWSIoTCreateCertificateResponse* resp = [[AWSIoTCreateCertificateResponse alloc] init];
                     resp.certificateId = certificateId;
                     resp.certificatePem = certificatePem;
@@ -246,7 +251,7 @@ static BOOL _tagCertificateEnabled = NO;
 
     NSString *publicTag = [AWSIoTKeychain.publicKeyTag stringByAppendingString:certificateId];
     NSString *privateTag = [AWSIoTKeychain.privateKeyTag stringByAppendingString:certificateId];
-    NSString *certTag = [AWSIoTKeychain.certTag stringByAppendingString: AWSIoTManager.tagCertificateEnabled ? certificateId : @""];
+    NSString *certTag = [AWSIoTManager certTagWithCertificateId:certificateId];
 
     if (![AWSIoTKeychain addPrivateKeyRef:privateKey tag:privateTag]) {
         if (publicKey) {
@@ -354,7 +359,11 @@ static BOOL _tagCertificateEnabled = NO;
         //
         // Try to retrieve a reference to the public key for the trust management object.
         //
-        *publicKeyRef = SecTrustCopyPublicKey(trust);
+        if (@available(iOS 12, macOS 10.14, *)) {
+            *publicKeyRef = SecCertificateCopyKey(*certRef);
+        } else {
+            *publicKeyRef = SecTrustCopyPublicKey(trust);
+        }
         if(*publicKeyRef == NULL)
         {
             AWSDDLogError(@"Unable to copy public key");
@@ -372,7 +381,7 @@ static BOOL _tagCertificateEnabled = NO;
 }
 
 + (BOOL)deleteCertificateWithCertificateId:(NSString*)certificateId {
-    NSString *certTag = [AWSIoTKeychain.certTag stringByAppendingString: certificateId];
+    NSString *certTag = [AWSIoTManager certTagWithCertificateId:certificateId];
     NSString *publicTag = [AWSIoTKeychain.publicKeyTag stringByAppendingString:certificateId];
     NSString *privateTag = [AWSIoTKeychain.privateKeyTag stringByAppendingString:certificateId];
 
@@ -383,7 +392,8 @@ static BOOL _tagCertificateEnabled = NO;
 
 + (BOOL)isValidCertificate:(NSString *)certificateId {
     NSString *tag = [NSString stringWithFormat:@"%@%@", [AWSIoTKeychain privateKeyTag], certificateId];
-    return [AWSIoTKeychain isValidCertificate:tag];
+    NSString *certLabel = [AWSIoTManager certTagWithCertificateId:certificateId];
+    return [AWSIoTKeychain isValidCertificate:tag certificateLabel:certLabel];
 }
 
 + (void)setKeyChainAccessibility:(AWSIoTKeyChainAccessibility)accessibility {

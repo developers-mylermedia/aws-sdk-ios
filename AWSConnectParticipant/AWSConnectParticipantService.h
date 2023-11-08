@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 FOUNDATION_EXPORT NSString *const AWSConnectParticipantSDKVersion;
 
 /**
- <p>Amazon Connect is a cloud-based contact center solution that makes it easy to set up and manage a customer contact center. Amazon Connect enables customer contacts through voice or chat. Use the Amazon Connect Participant Service to manage chat participants, such as agents and customers.</p>
+ <p>Amazon Connect is an easy-to-use omnichannel cloud contact center service that enables companies of any size to deliver superior customer service at a lower cost. Amazon Connect communications capabilities make it easy for companies to deliver personalized interactions across communication channels, including chat. </p><p>Use the Amazon Connect Participant Service to manage participants (for example, agents, customers, and managers listening in), and to send messages and events within a chat contact. The APIs in the service enable the following: sending chat messages, attachment sharing, managing a participant's connection state and message events, and retrieving chat transcripts.</p>
  */
 @interface AWSConnectParticipant : AWSService
 
@@ -223,6 +223,31 @@ FOUNDATION_EXPORT NSString *const AWSConnectParticipantSDKVersion;
  @see AWSConnectParticipantCreateParticipantConnectionResponse
  */
 - (void)createParticipantConnection:(AWSConnectParticipantCreateParticipantConnectionRequest *)request completionHandler:(void (^ _Nullable)(AWSConnectParticipantCreateParticipantConnectionResponse * _Nullable response, NSError * _Nullable error))completionHandler;
+
+/**
+ <p>Retrieves the view for the specified view token.</p>
+ 
+ @param request A container for the necessary parameters to execute the DescribeView service method.
+
+ @return An instance of `AWSTask`. On successful execution, `task.result` will contain an instance of `AWSConnectParticipantDescribeViewResponse`. On failed execution, `task.error` may contain an `NSError` with `AWSConnectParticipantErrorDomain` domain and the following error code: `AWSConnectParticipantErrorAccessDenied`, `AWSConnectParticipantErrorInternalServer`, `AWSConnectParticipantErrorThrottling`, `AWSConnectParticipantErrorResourceNotFound`, `AWSConnectParticipantErrorValidation`.
+ 
+ @see AWSConnectParticipantDescribeViewRequest
+ @see AWSConnectParticipantDescribeViewResponse
+ */
+- (AWSTask<AWSConnectParticipantDescribeViewResponse *> *)describeView:(AWSConnectParticipantDescribeViewRequest *)request;
+
+/**
+ <p>Retrieves the view for the specified view token.</p>
+ 
+ @param request A container for the necessary parameters to execute the DescribeView service method.
+ @param completionHandler The completion handler to call when the load request is complete.
+                          `response` - A response object, or `nil` if the request failed.
+                          `error` - An error object that indicates why the request failed, or `nil` if the request was successful. On failed execution, `error` may contain an `NSError` with `AWSConnectParticipantErrorDomain` domain and the following error code: `AWSConnectParticipantErrorAccessDenied`, `AWSConnectParticipantErrorInternalServer`, `AWSConnectParticipantErrorThrottling`, `AWSConnectParticipantErrorResourceNotFound`, `AWSConnectParticipantErrorValidation`.
+ 
+ @see AWSConnectParticipantDescribeViewRequest
+ @see AWSConnectParticipantDescribeViewResponse
+ */
+- (void)describeView:(AWSConnectParticipantDescribeViewRequest *)request completionHandler:(void (^ _Nullable)(AWSConnectParticipantDescribeViewResponse * _Nullable response, NSError * _Nullable error))completionHandler;
 
 /**
  <p>Disconnects a participant. </p><note><p><code>ConnectionToken</code> is used for invoking this API instead of <code>ParticipantToken</code>.</p></note><p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 authentication</a>.</p>
