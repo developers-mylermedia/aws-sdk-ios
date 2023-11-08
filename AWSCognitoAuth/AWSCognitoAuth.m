@@ -161,11 +161,8 @@ static NSString * AWSCognitoAuthAsfDeviceId = @"asf.device.id";
 
 + (void)registerCognitoAuthWithAuthConfiguration:(AWSCognitoAuthConfiguration *) authConfiguration
                                           forKey:(NSString *)key {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _instanceDictionary = [NSMutableDictionary new];
-        _dispatchQueue = dispatch_queue_create("com.amazonaws.AWSCognitoAuthDictionary", DISPATCH_QUEUE_SERIAL);
-    });
+    _instanceDictionary = [NSMutableDictionary new];
+    _dispatchQueue = dispatch_queue_create("com.amazonaws.AWSCognitoAuthDictionary", DISPATCH_QUEUE_SERIAL);
     AWSCognitoAuth *cognitoAuth = [[AWSCognitoAuth alloc] initWithConfiguration:authConfiguration];
     [self setObject:cognitoAuth
              forKey:key];
