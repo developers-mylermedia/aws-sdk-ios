@@ -18,6 +18,7 @@ This fork has been created to re-initalize the AWSMobileClient instance. Re-init
 - In `AWSMobileClient.swift`, the `userpoolOpsHelper` in the `_internalInitialize` func gets recreated instead of using the sharedInstance.
 - In `AWSCognitoIdentityUserPool.m`, the `dispatch_once` in the `defaultCognitoIdentityUserPool` func has been removed to make sure the `_defaultUserPool` gets recreated.
 - In `AWSInfo.m`, the `configureDefaultAWSInfo` func has been adjusted to make sure the `_userConfig` and `_defaultAWSInfo` always get recreated.
+- In version 2.33.4.1, updated `AWSCognitoAuth.m`. Removed `dispatch_once` block around variables `_instanceDirectory` and `_dispatchQueue` to make sure these variables can be recreated. 
 
 ## Features / APIs
 We recommend using the latest v2 version of AWS Amplify Library for Swift to quickly implement common app use cases like Authentication, Storage, Push Notifications and more that follow patterns idiomatic to Swift like async/await. 
